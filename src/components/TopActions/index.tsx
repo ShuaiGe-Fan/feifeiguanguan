@@ -7,18 +7,10 @@ import './TopActions.less'
 export default function TopActions() {
   return (
     <div className="top-actions-wrapper">
-      <div className="grid grid-cols-4 gap-3">
-        <Link to="/kitten" className="action-btn action-btn-pink">
-          <div className="action-icon">🐱</div>
-          <span>养猫咪</span>
-        </Link>
+      <div className="grid grid-cols-2 gap-3">
         <Link to="/diary" className="action-btn action-btn-purple">
           <div className="action-icon">📝</div>
           <span>写日记</span>
-        </Link>
-        <Link to="/status" className="action-btn action-btn-blue">
-          <div className="action-icon">💬</div>
-          <span>说说</span>
         </Link>
         <Link to="/games" className="action-btn action-btn-green">
           <div className="action-icon">🎮</div>

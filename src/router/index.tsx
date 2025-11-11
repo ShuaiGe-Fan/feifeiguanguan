@@ -5,6 +5,7 @@ import Memories from '../pages/Memories'
 import Publish from '../pages/Publish'
 import Chat from '../pages/Chat'
 import Profile from '../pages/Profile'
+import WhatToEat from '../pages/WhatToEat'
 
 /**
  * 路由配置
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'what-to-eat',
+        element: <WhatToEat />
       }
     ]
   }

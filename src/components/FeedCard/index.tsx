@@ -40,6 +40,9 @@ export default function FeedCard({
     return type === 'diary' ? '写了一篇日记' : '发布了说说'
   }
 
+  // 过滤掉说说类型的动态
+  const filteredFeeds = feeds.filter(feed => feed.type !== 'status')
+
   return (
     <div className="card feed-card">
       <div className="flex justify-between items-center mb-4">
@@ -47,7 +50,7 @@ export default function FeedCard({
         <button className="view-more-btn">查看更多</button>
       </div>
       <div className="flex flex-col gap-4">
-        {feeds.map((feed) => (
+        {filteredFeeds.map((feed) => (
           <div key={feed.id} className="feed-item">
             <div className="feed-avatar">{feed.avatar}</div>
             <div className="flex-1">
@@ -64,4 +67,3 @@ export default function FeedCard({
     </div>
   )
 }
-

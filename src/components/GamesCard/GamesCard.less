@@ -24,7 +24,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 20px;
+  padding: 24px 40px;
   border: none;
   border-radius: @border-radius-sm;
   cursor: pointer;
@@ -36,6 +36,8 @@
   letter-spacing: 0.02em;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  min-width: 160px;
   
   &::before {
     content: '';
@@ -58,8 +60,9 @@
   }
 
   @media (max-width: 480px) {
-    padding: 20px 16px;
+    padding: 20px 32px;
     font-size: @font-size-sm;
+    min-width: 140px;
   }
 }
 
@@ -77,11 +80,14 @@
 .game-btn-yellow {
   .gradient-yellow();
   box-shadow: 0 4px 16px rgba(255, 217, 61, 0.35);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 217, 61, 0.45);
+  }
 }
 
 .game-btn-green {
   .gradient-green-game();
   box-shadow: 0 4px 16px rgba(110, 231, 183, 0.35);
 }
-
-
