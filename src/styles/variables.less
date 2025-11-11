@@ -1,0 +1,88 @@
+// Less 变量定义
+@primary-color: #ff6b9d;
+@secondary-color: #c44569;
+@background-color: #f5f5f5;
+@text-color: #333;
+@text-secondary: #666;
+@text-light: #999;
+@card-background: #ffffff;
+@border-radius: 20px;
+@border-radius-sm: 16px;
+@border-radius-lg: 12px;
+@shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+@shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+@shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+// 渐变颜色
+@gradient-pink-start: #ff9a9e;
+@gradient-pink-end: #fecfef;
+@gradient-purple-start: #a8edea;
+@gradient-purple-end: #fed6e3;
+@gradient-blue-start: #89f7fe;
+@gradient-blue-end: #66a6ff;
+@gradient-green-start: #a8e063;
+@gradient-green-end: #56ab2f;
+@gradient-yellow-start: #f6d365;
+@gradient-yellow-end: #fda085;
+@gradient-green-game-start: #84fab0;
+@gradient-green-game-end: #8fd3f4;
+@gradient-orange-start: #ff9a56;
+@gradient-orange-end: #ff6a88;
+
+// Less Mixin
+.card-shadow() {
+  box-shadow: @shadow;
+}
+
+.card-shadow-sm() {
+  box-shadow: @shadow-sm;
+}
+
+.card-shadow-lg() {
+  box-shadow: @shadow-lg;
+}
+
+.gradient-pink() {
+  background: linear-gradient(135deg, @gradient-pink-start 0%, @gradient-pink-end 100%);
+}
+
+.gradient-purple() {
+  background: linear-gradient(135deg, @gradient-purple-start 0%, @gradient-purple-end 100%);
+}
+
+.gradient-blue() {
+  background: linear-gradient(135deg, @gradient-blue-start 0%, @gradient-blue-end 100%);
+}
+
+.gradient-green() {
+  background: linear-gradient(135deg, @gradient-green-start 0%, @gradient-green-end 100%);
+}
+
+.gradient-yellow() {
+  background: linear-gradient(135deg, @gradient-yellow-start 0%, @gradient-yellow-end 100%);
+}
+
+.gradient-green-game() {
+  background: linear-gradient(135deg, @gradient-green-game-start 0%, @gradient-green-game-end 100%);
+}
+
+.gradient-orange() {
+  background: linear-gradient(135deg, @gradient-orange-start 0%, @gradient-orange-end 100%);
+}
+
+.gradient-primary() {
+  background: linear-gradient(135deg, @primary-color 0%, @secondary-color 100%);
+}
+
+.touch-action() {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.transition-all() {
+  transition: all 0.2s ease;
+}
+
+.flex() {
+  display: flex;
+}

@@ -1,0 +1,22 @@
+// 示例：如何在组件中使用 Less
+// 在组件中导入：import './Component.less'
+
+.example-less-usage {
+  // 使用变量
+  color: @primary-color;
+  background-color: @background-color;
+  border-radius: @border-radius;
+  
+  // 使用 Mixin
+  .card-shadow();
+  
+  // Less 嵌套
+  .nested-class {
+    padding: 16px;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+

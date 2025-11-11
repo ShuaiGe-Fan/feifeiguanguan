@@ -1,0 +1,22 @@
+@import './variables.less';
+
+// 卡片通用样式
+.card {
+  background: @card-background;
+  border-radius: @border-radius;
+  padding: 20px;
+  .card-shadow();
+
+  @media (max-width: 480px) {
+    padding: 16px;
+    border-radius: @border-radius-sm;
+  }
+}
+
+// 横屏优化
+@media (orientation: landscape) and (max-height: 500px) {
+  .card {
+    padding: 12px;
+  }
+}
+

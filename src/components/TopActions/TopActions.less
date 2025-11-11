@@ -1,0 +1,44 @@
+@import '../../styles/variables.less';
+
+// 顶部功能按钮
+.action-btn {
+  .flex();
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 8px;
+  border: none;
+  border-radius: @border-radius-sm;
+  background: @card-background;
+  cursor: pointer;
+  .transition-all();
+  .touch-action();
+  .card-shadow-sm();
+  color: #fff;
+  text-decoration: none;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 4px;
+  }
+}
+
+.action-btn-pink {
+  .gradient-pink();
+}
+
+.action-btn-purple {
+  .gradient-purple();
+}
+
+.action-btn-blue {
+  .gradient-blue();
+}
+
+.action-btn-green {
+  .gradient-green();
+}
+
