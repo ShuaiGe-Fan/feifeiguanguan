@@ -6,48 +6,73 @@
   border: none;
   background: none;
   color: @primary-color;
-  font-size: 14px;
+  font-size: @font-size-sm;
   cursor: pointer;
-  padding: 0;
+  padding: 4px 8px;
+  border-radius: @border-radius-lg;
+  font-weight: @font-weight-medium;
+  transition: all 0.3s ease;
+  letter-spacing: 0.01em;
+  
+  &:hover {
+    background: rgba(255, 107, 157, 0.1);
+    transform: translateX(2px);
+  }
 }
 
 .feed-item {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  padding: 12px;
+  border-radius: @border-radius-lg;
+  transition: background 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 179, 186, 0.08);
+  }
 }
 
 .feed-avatar {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   .gradient-pink();
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 26px;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .feed-text {
-  font-size: 15px;
+  font-size: @font-size-base;
   color: @text-color;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  line-height: @line-height-normal;
+  font-weight: @font-weight-normal;
+  letter-spacing: 0.01em;
 }
 
 .feed-author {
-  font-weight: 600;
+  font-weight: @font-weight-semibold;
   color: @primary-color;
+  letter-spacing: 0.01em;
 }
 
 .feed-preview {
-  font-size: 14px;
+  font-size: @font-size-sm;
   color: @text-secondary;
-  margin-bottom: 6px;
-  line-height: 1.5;
+  margin-bottom: 8px;
+  line-height: @line-height-relaxed;
+  letter-spacing: 0.01em;
 }
 
 .feed-time {
-  font-size: 12px;
+  font-size: @font-size-xs;
   color: @text-light;
+  font-weight: @font-weight-normal;
+  letter-spacing: 0.01em;
 }
 

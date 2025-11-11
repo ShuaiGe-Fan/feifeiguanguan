@@ -1,22 +1,57 @@
 @import './variables.less';
 
-// 卡片通用样式
+// 卡片通用样式 - 精致优化
 .card {
-  background: @card-background;
+  background: @card-background-warm;
   border-radius: @border-radius;
-  padding: 20px;
+  padding: 24px;
   .card-shadow();
+  border: 1px solid rgba(255, 138, 101, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  // 微妙的内部高光
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    opacity: 0.6;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: @shadow-lg;
+    border-color: rgba(255, 138, 101, 0.25);
+  }
+
+  h3 {
+    font-size: @font-size-lg;
+    font-weight: @font-weight-bold;
+    color: @text-color;
+    letter-spacing: -0.01em;
+    line-height: @line-height-tight;
+    margin: 0;
+  }
 
   @media (max-width: 480px) {
-    padding: 16px;
+    padding: 20px;
     border-radius: @border-radius-sm;
+    
+    h3 {
+      font-size: @font-size-md;
+    }
   }
 }
 
 // 横屏优化
 @media (orientation: landscape) and (max-height: 500px) {
   .card {
-    padding: 12px;
+    padding: 16px;
   }
 }
 

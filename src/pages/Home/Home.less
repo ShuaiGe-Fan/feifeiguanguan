@@ -4,7 +4,28 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, @background-gradient-start 0%, @background-gradient-middle 50%, @background-gradient-end 100%);
   padding-bottom: 70px;
+  position: relative;
+  
+  // 添加微妙的纹理效果
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(255, 179, 186, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 138, 101, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 

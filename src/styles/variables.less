@@ -1,33 +1,59 @@
-// Less 变量定义
-@primary-color: #ff6b9d;
-@secondary-color: #c44569;
-@background-color: #f5f5f5;
-@text-color: #333;
-@text-secondary: #666;
-@text-light: #999;
-@card-background: #ffffff;
-@border-radius: 20px;
-@border-radius-sm: 16px;
-@border-radius-lg: 12px;
-@shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-@shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-@shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
+// Less 变量定义 - 温暖高级配色方案（暖色调 + 精致字体）
+@primary-color: #FF6B9D; // 高饱和度粉色
+@secondary-color: #E85A8A; // 深粉色
+@warm-orange: #FF8A65; // 温暖橙色
+@warm-peach: #FFB3BA; // 温暖桃色
+@warm-cream: #FFF5E6; // 温暖奶油色
+@warm-beige: #F5E6D3; // 温暖米色
+@background-color: #FFF8F0; // 温暖米白色背景
+@background-gradient-start: #FFF8F0; // 渐变起始
+@background-gradient-middle: #FFF0E6; // 渐变中间
+@background-gradient-end: #FFE8E0; // 渐变结束
+@text-color: #3D2817; // 温暖深棕色文字
+@text-secondary: #6B4E3D; // 中棕色
+@text-light: #9B7A6B; // 浅棕色
+@card-background: #FFFFFF;
+@card-background-warm: #FFFBF5; // 温暖卡片背景
+@border-radius: 24px; // 更大的圆角，更精致
+@border-radius-sm: 18px;
+@border-radius-lg: 16px;
+@shadow: 0 6px 24px rgba(255, 138, 101, 0.12);
+@shadow-sm: 0 4px 16px rgba(255, 138, 101, 0.08);
+@shadow-lg: 0 12px 40px rgba(255, 138, 101, 0.18);
 
-// 渐变颜色
-@gradient-pink-start: #ff9a9e;
-@gradient-pink-end: #fecfef;
-@gradient-purple-start: #a8edea;
-@gradient-purple-end: #fed6e3;
-@gradient-blue-start: #89f7fe;
-@gradient-blue-end: #66a6ff;
-@gradient-green-start: #a8e063;
-@gradient-green-end: #56ab2f;
-@gradient-yellow-start: #f6d365;
-@gradient-yellow-end: #fda085;
-@gradient-green-game-start: #84fab0;
-@gradient-green-game-end: #8fd3f4;
-@gradient-orange-start: #ff9a56;
-@gradient-orange-end: #ff6a88;
+// 字体设置
+@font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-size-xs: 11px;
+@font-size-sm: 13px;
+@font-size-base: 15px;
+@font-size-md: 17px;
+@font-size-lg: 20px;
+@font-size-xl: 24px;
+@font-size-2xl: 28px;
+@font-weight-light: 300;
+@font-weight-normal: 400;
+@font-weight-medium: 500;
+@font-weight-semibold: 600;
+@font-weight-bold: 700;
+@line-height-tight: 1.4;
+@line-height-normal: 1.6;
+@line-height-relaxed: 1.8;
+
+// 渐变颜色 - 温暖高饱和度配色
+@gradient-pink-start: #FF6B9D; // 高饱和度粉色
+@gradient-pink-end: #FFB3BA; // 温暖桃色
+@gradient-purple-start: #C77DFF; // 温暖紫色
+@gradient-purple-end: #E0B3FF; // 浅紫色
+@gradient-blue-start: #6BB6FF; // 温暖蓝色
+@gradient-blue-end: #8FC8FF; // 浅蓝色
+@gradient-green-start: #4ECDC4; // 青绿色
+@gradient-green-end: #6EE7B7; // 薄荷绿
+@gradient-yellow-start: #FFD93D; // 明亮黄色
+@gradient-yellow-end: #FFB84D; // 温暖橙色
+@gradient-green-game-start: #6EE7B7; // 薄荷绿
+@gradient-green-game-end: #4ECDC4; // 青绿色
+@gradient-orange-start: #FF8A65; // 温暖珊瑚橙
+@gradient-orange-end: #FFB3BA; // 温暖桃色
 
 // Less Mixin
 .card-shadow() {

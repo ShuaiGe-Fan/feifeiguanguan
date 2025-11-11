@@ -2,17 +2,32 @@
 @import '../../styles/common.less';
 
 .page-header {
-  padding: 20px 16px;
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 24px 20px;
+  background: linear-gradient(135deg, #FFFFFF 0%, @card-background-warm 100%);
+  border-bottom: 1px solid rgba(255, 138, 101, 0.15);
+  
+  h1 {
+    font-size: @font-size-2xl;
+    font-weight: @font-weight-bold;
+    color: @text-color;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  
+  p {
+    font-size: @font-size-sm;
+    color: @text-secondary;
+    font-weight: @font-weight-normal;
+    letter-spacing: 0.01em;
+  }
 }
 
 .page-content {
   flex: 1;
-  padding: 16px;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   padding-bottom: 70px;
 }
 
@@ -23,6 +38,26 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, @background-gradient-start 0%, @background-gradient-middle 50%, @background-gradient-end 100%);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(255, 179, 186, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 138, 101, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
