@@ -1,19 +1,20 @@
-import { useState } from 'react'
-import catImage from '../../assets/猫咪.png'
+import { useState, useRef, useEffect } from 'react'
 import './WhatToEat.less'
 
 /**
  * 食物选项预设
  */
 const FOOD_OPTIONS = [
-  '火锅', '烧烤', '日料', '韩式烤肉', 
-  '意大利面', '披萨', '汉堡', '炸鸡', '麻辣烫', '米线', 
-  '饺子', '包子', '煎饼果子', '烤冷面', '臭豆腐', '三文鱼',
-  '牛肉拉面', '石锅拌饭', '冷面',
+  '火锅', '烧烤', '日料', '韩式烤肉',
+  '意大利面', '披萨', '汉堡', '炸鸡', '麻辣烫', '米线',
+  '饺子', '包子', '煎饼果子', '烤冷面', '三文鱼', "火鸡面",
+  '牛肉拉面', '石锅拌饭', '干噎酸奶',
   '小龙虾', '烤鱼', '酸菜鱼',
-  '自助餐', '素食', '三明治', '双皮奶', '银耳莲子汤',
-  '煲仔饭', '盖浇饭', '炒饭', '炒面', '炒河粉', '肠粉',
-  '北京烤鸭', '黄焖鸡',
+  '自助餐', '素食', '三明治', '双皮奶',
+  '煲仔饭',
+  '烤鸭', '黄焖鸡', '糖水', '陇上秦轩', '和府捞面', '麻辣拌',
+  '麻辣香锅', '鸡爪煲', '米村拌饭', '大米先生', '酸辣粉', '过桥米线',
+
 ]
 
 /**
@@ -21,8 +22,9 @@ const FOOD_OPTIONS = [
  */
 export default function WhatToEat() {
   const [isSpinning, setIsSpinning] = useState(false)
-  const [result, setResult] = useState<string | null>(null)
-  const [angle, setAngle] = useState(0)
+  const [currentFood, setCurrentFood] = useState<string>('')
+  const [finalFood, setFinalFood] = useState<string | null>(null)
+  const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   /**
    * 开始抽奖
@@ -30,87 +32,99 @@ export default function WhatToEat() {
   const handleSpin = () => {
     if (isSpinning) return
 
+    // 清理之前的定时器
+    if (intervalRef.current) {
+      clearTimeout(intervalRef.current)
+      intervalRef.current = null
+    }
+
     setIsSpinning(true)
-    setResult(null)
+    setFinalFood(null)
 
-    // 随机选择一个食物
+    // 随机选择最终结果（从列表中随机选）
     const randomIndex = Math.floor(Math.random() * FOOD_OPTIONS.length)
-    const selectedFood = FOOD_OPTIONS[randomIndex]
+    const finalResult = FOOD_OPTIONS[randomIndex]
 
-    // 计算转盘旋转角度
-    // 指针在顶部（0度），要让选中的选项正对指针
-    const sliceAngle = 360 / FOOD_OPTIONS.length // 每个扇形的角度
-    const sliceCenterAngle = randomIndex * sliceAngle + sliceAngle / 2 // 选中扇形的中心角度
+    // 开始快速切换文字
+    const totalTime = 2000 // 3秒
+    const initialSpeed = 10 // 初始速度50ms
+    const finalSpeed = 100 // 最终速度200ms
+    const startTime = Date.now()
 
-    // 要让这个中心转到顶部（0度），需要旋转的角度
-    // 加上多转几圈增加视觉效果
-    const spins = 5 // 转5圈
-    const currentAngle = angle % 360
-    const targetAngle = 360 - sliceCenterAngle // 让选中项转到顶部
-    const finalAngle = currentAngle + 360 * spins + targetAngle
+    const changeText = () => {
+      const elapsed = Date.now() - startTime
 
-    setAngle(finalAngle)
+      if (elapsed >= totalTime) {
+        // 时间到了，显示最终结果
+        setCurrentFood(finalResult)
+        setFinalFood(finalResult)
+        setIsSpinning(false)
+        if (intervalRef.current) {
+          clearTimeout(intervalRef.current)
+          intervalRef.current = null
+        }
+        return
+      }
 
-    // 动画结束后显示结果（确保结果总是显示）
-    setTimeout(() => {
-      setResult(selectedFood)
-      setIsSpinning(false)
-    }, 3000)
+      // 计算当前速度（从快到慢）
+      const progress = elapsed / totalTime
+      const easeOut = 1 - Math.pow(1 - progress, 3) // ease-out曲线
+      const currentSpeed = initialSpeed + (finalSpeed - initialSpeed) * easeOut
+
+      // 随机显示一个选项
+      const randomFoodIndex = Math.floor(Math.random() * FOOD_OPTIONS.length)
+      setCurrentFood(FOOD_OPTIONS[randomFoodIndex])
+
+      if (intervalRef.current) {
+        clearTimeout(intervalRef.current)
+      }
+      intervalRef.current = setTimeout(changeText, Math.max(currentSpeed, 30))
+    }
+
+    // 开始第一次切换
+    changeText()
   }
+
+  /**
+   * 清理定时器
+   */
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearTimeout(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [])
+
+  // 显示的文字（抽奖中显示当前切换的文字，结束后显示最终结果）
+  const displayText = finalFood || currentFood || '点击开始抽奖'
 
   return (
     <div className="what-to-eat-page">
       <main className="page-content">
         <div className="lottery-container">
-          {/* 转盘 */}
-          <div className="wheel-wrapper">
-            <div
-              className={`wheel ${isSpinning ? 'spinning' : ''}`}
-              style={{ transform: `rotate(${angle}deg)` }}
-            >
-              <div className={`wheel-inner ${result ? 'has-result' : ''}`}>
-                {!result ? (
-                  <img src={catImage} alt="猫咪" className="wheel-icon" />
-                ) : (
-                  <div
-                    className="wheel-center-rotator"
-                    style={{ transform: `rotate(${-angle}deg)` }}
-                  >
-                    <div className="wheel-center has-result">
-                      <div className="result-icon">🎉</div>
-                      <div className="result-food">{result}</div>
-                    </div>
-                  </div>
-                )}
+          {/* 文字显示窗口 */}
+          <div className="slot-machine-wrapper">
+            <div className={`slot-machine-window ${finalFood !== null ? 'has-result' : ''}`}>
+              <div className="slot-item-text">
+                {displayText}
               </div>
             </div>
-            {/* 指针 */}
-            <div className="wheel-pointer"></div>
           </div>
 
           {/* 抽奖按钮 */}
-          {!result ? (
-            <button
-              className={`spin-btn ${isSpinning ? 'disabled' : ''}`}
-              onClick={handleSpin}
-              disabled={isSpinning}
-            >
-              {isSpinning ? '抽奖中...' : '开始抽奖'}
-            </button>
-          ) : (
-            <button
-              className="again-btn"
-              onClick={() => {
-                setResult(null)
-                setAngle(0)
-              }}
-            >
-              再抽一次
-            </button>
-          )}
+          <button
+            className={`spin-btn ${isSpinning ? 'disabled' : ''}`}
+            onClick={handleSpin}
+            disabled={isSpinning}
+          >
+            {isSpinning ? '抽奖中...' : finalFood !== null ? '再抽一次' : '开始抽奖'}
+          </button>
         </div>
       </main>
     </div>
   )
 }
+
 
