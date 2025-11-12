@@ -6,6 +6,7 @@ import Publish from '../pages/Publish'
 import Chat from '../pages/Chat'
 import Profile from '../pages/Profile'
 import WhatToEat from '../pages/WhatToEat'
+import DrinkMilkTea from '../pages/DrinkMilkTea'
 
 /**
  * 路由配置
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'what-to-eat',
         element: <WhatToEat />
+      },
+      {
+        path: 'drink-milk-tea',
+        element: <DrinkMilkTea />
       }
     ]
   }

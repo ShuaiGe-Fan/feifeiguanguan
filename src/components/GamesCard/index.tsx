@@ -11,10 +11,14 @@ export default function GamesCard() {
         <h3 className="text-lg font-semibold text-gray-800 m-0">小游戏</h3>
         <button className="settings-btn">⚙️</button>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-4 flex-wrap">
         <Link to="/what-to-eat" className="game-btn game-btn-yellow">
           <span className="game-icon">🍽️</span>
           <span>吃什么</span>
+        </Link>
+        <Link to="/drink-milk-tea" className="game-btn game-btn-pink">
+          <span className="game-icon">🧋</span>
+          <span>喝奶茶</span>
         </Link>
       </div>
     </div>

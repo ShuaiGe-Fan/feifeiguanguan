@@ -1,0 +1,340 @@
+@import '../../styles/variables.less';
+@import '../../styles/common.less';
+
+// 高级配色方案 - 温暖珊瑚粉与高级蓝色
+@wheel-color-1: #F5A097; // 温暖珊瑚粉 - 高级温暖色调（喝奶茶）
+@wheel-color-2: #6BA8D1; // 高级蓝色 - 优雅清新色调（不喝啦）
+
+.drink-milk-tea-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, @background-gradient-start 0%, @background-gradient-middle 50%, @background-gradient-end 100%);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(245, 160, 151, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(107, 168, 209, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.page-content {
+  flex: 1;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100px;
+}
+
+.wheel-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+// 转盘包装器
+.wheel-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  
+  @media (max-width: 480px) {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+// 转盘
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 0 20px rgba(0, 0, 0, 0.05);
+  transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 8px solid #fff;
+  box-sizing: border-box;
+  // 使用 conic-gradient：粉色270度，蓝色90度
+  background: conic-gradient(
+    @wheel-color-1 0deg 270deg,
+    @wheel-color-2 270deg 360deg
+  );
+  
+  &.spinning {
+    transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+// 转盘半圆（移除渐变效果，保持纯色）
+.wheel-half {
+  display: none; // 隐藏渐变叠加层，使用纯色
+}
+
+// 转盘文字区域
+.wheel-text {
+  position: absolute;
+  left: 50%;
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 5;
+  pointer-events: none;
+  text-align: center;
+}
+
+// 上半部分文字（珊瑚粉区域）- 位于上半部分的中心
+// 转盘中心在50%，上半部分的中心在25%位置
+.wheel-text-top {
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 下半部分文字（蓝色区域）- 位于下半部分的中心
+// 转盘中心在50%，下半部分的中心在75%位置
+.wheel-text-bottom {
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+// 表情符号
+.wheel-emoji {
+  font-size: 48px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  
+  @media (max-width: 480px) {
+    font-size: 40px;
+  }
+}
+
+// 文字标签
+.wheel-label {
+  font-size: @font-size-xl;
+  font-weight: @font-weight-bold;
+  color: #fff;
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  
+  @media (max-width: 480px) {
+    font-size: @font-size-lg;
+  }
+}
+
+// 中心指针
+.pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid @primary-color;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  z-index: 10;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: @primary-color;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// 转盘按钮
+.spin-btn {
+  padding: 18px 48px;
+  border: none;
+  border-radius: @border-radius;
+  background: linear-gradient(135deg, @primary-color 0%, @secondary-color 100%);
+  color: #fff;
+  font-size: @font-size-lg;
+  font-weight: @font-weight-bold;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  .touch-action();
+  
+  &:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 107, 157, 0.5);
+  }
+  
+  &:active:not(.disabled) {
+    transform: translateY(0);
+  }
+  
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// 结果弹框遮罩层
+.result-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 结果弹框
+.result-modal {
+  position: relative;
+  width: 90%;
+  max-width: 320px;
+  animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// 结果内容
+.result-content {
+  background: #fff;
+  border-radius: @border-radius;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+  
+  &.result-pink {
+    border: 3px solid @wheel-color-1;
+  }
+  
+  &.result-blue {
+    border: 3px solid @wheel-color-2;
+  }
+}
+
+// 结果表情
+.result-emoji {
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 20px;
+  animation: bounce 0.6s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  
+  @media (max-width: 480px) {
+    font-size: 56px;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// 结果文字
+.result-text {
+  font-size: @font-size-2xl;
+  font-weight: @font-weight-bold;
+  color: @text-color;
+  margin-bottom: 30px;
+  letter-spacing: 0.05em;
+  
+  .result-pink & {
+    color: @wheel-color-1;
+  }
+  
+  .result-blue & {
+    color: @wheel-color-2;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: @font-size-xl;
+  }
+}
+
+// 关闭按钮
+.result-close-btn {
+  padding: 12px 32px;
+  border: 2px solid @primary-color;
+  border-radius: @border-radius-sm;
+  background: @primary-color;
+  color: #fff;
+  font-size: @font-size-base;
+  font-weight: @font-weight-semibold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  .touch-action();
+  
+  &:hover {
+    background: @secondary-color;
+    border-color: @secondary-color;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
